@@ -16,7 +16,6 @@ form.addEventListener('submit', async e => {
   e.preventDefault();
 
   const query = e.target.elements['search-text'].value.trim();
-  e.target.reset();
 
   if (!query) return;
   clearGallery();
@@ -39,9 +38,11 @@ form.addEventListener('submit', async e => {
     }
 
     createGallery(data.hits);
+
+    e.target.reset();
   } catch (error) {
     iziToast.error({
-      message: 'Something went wrong. Please try again!',
+      message: `Something went wrong: ${error.message}`,
       position: 'topRight',
     });
   } finally {
